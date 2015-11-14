@@ -1,0 +1,8 @@
+﻿CREATE TABLE [dbo].[Cache] (
+    [Id]   INT           IDENTITY (1, 1) NOT NULL,
+    [Name] NVARCHAR (50) NOT NULL,
+    [Description] NVARCHAR(1024) NOT NULL, 
+    CONSTRAINT [PK_Cache] PRIMARY KEY CLUSTERED ([Id] ASC),
+    CONSTRAINT [AK_Name] UNIQUE NONCLUSTERED ([Name] ASC)
+);
+

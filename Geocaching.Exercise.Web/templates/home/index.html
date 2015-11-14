@@ -1,0 +1,81 @@
+﻿<h2>Hello Geocachers!</h2><br />
+<div ng-controller="CachesCtrl">
+    <table>
+        <tbody>
+            <tr>
+                <td valign="top">
+                    <button class="btn btn-default" ng-click="getCaches()">Get Geocaches</button> <button class="btn btn-default" ng-click="openAddCache()">Add Geocache</button>
+                    <table ng-show="caches.length > 0">
+                        <thead>
+                            <tr>
+                                <th width="200px">Name</th>
+                                <th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="cache in caches">
+                                <td width="200px"><a ng-click="setCache(cache)">{{cache.Name}}</a></td>
+                                <td><a ng-click="delete(cache)">X</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <script type="text/ng-template" id="cache-create-dialog.html">
+                        <div class="modal-header">
+                            <h3 class="modal-title">New Geocache</h3>
+                        </div>
+                        <div class="modal-body">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td valign="top">
+                                            <table>
+                                                <tbody>
+                                                    <tr>
+                                                        <td valign="top">Name:</td>
+                                                        <td valign="top"><input type="text" class="form-control" id="name" ng-model="name" maxlength="50" /></td>
+                                                    </tr>
+                                                    <tr><td colspan="2">&nbsp;</td></tr>
+                                                    <tr>
+                                                        <td valign="top">Description:</td>
+                                                        <td valign="top"><textarea maxlength="1024" class="form-control" id="description" ng-model="description" rows="5" cols="50"></textarea></td>
+                                                    </tr>
+                                                    <tr><td colspan="2">&nbsp;</td></tr>
+                                                    <tr>
+                                                        <td valign="top">Latitude:</td>
+                                                        <td valign="top"><input type="text" class="form-control" id="latitude" ng-model="latitude" /></td>
+                                                    </tr>
+                                                    <tr><td colspan="2">&nbsp;</td></tr>
+                                                    <tr>
+                                                        <td valign="top">Longitude:</td>
+                                                        <td valign="top"><input type="text" class="form-control" id="longitude" ng-model="longitude" /></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                        <td>&nbsp;</td>
+                                        <td valign="top">
+                                            <div id="newMap" class="map"></div>
+                                            <div>click the map to automatically set a new Lat:Long</div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+                            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                        </div>
+                    </script>
+                </td>
+                <td width="20">&nbsp;</td>
+                <td valign="top">
+                    <div ng-show="selectedCache != null">
+                        <h2>{{selectedCache.Name}}</h2>
+                        <p>{{selectedCache.Description}}</p>
+                        <div id="cacheMap" class="map"></div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

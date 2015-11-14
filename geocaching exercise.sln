@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geocaching.Exercise.Web", "Geocaching.Exercise.Web\Geocaching.Exercise.Web.csproj", "{C67953CA-2A83-4DB3-8DB9-BA75DDD66E9A}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Geocaching.Exercise.Database", "Geocaching.Exercise.Database\Geocaching.Exercise.Database.sqlproj", "{FE288BF6-07A8-4843-BE56-7AD36B8478FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geocaching.Exercise.Data", "Geocaching.Exercise.Data\Geocaching.Exercise.Data.csproj", "{0A5AB426-4A5F-4D8E-A837-331AB3FC66F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geocaching.Exercise.Data.Model.EF", "Geocaching.Exercise.Data.Model.EF\Geocaching.Exercise.Data.Model.EF.csproj", "{9577609C-F8E1-45B4-B42E-628A09FF6475}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geocaching.Exercise.Data.Test", "Geocaching.Exercise.Data.Test\Geocaching.Exercise.Data.Test.csproj", "{70173ADA-5D07-4175-9D46-80519FF3EF87}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C67953CA-2A83-4DB3-8DB9-BA75DDD66E9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C67953CA-2A83-4DB3-8DB9-BA75DDD66E9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C67953CA-2A83-4DB3-8DB9-BA75DDD66E9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C67953CA-2A83-4DB3-8DB9-BA75DDD66E9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE288BF6-07A8-4843-BE56-7AD36B8478FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE288BF6-07A8-4843-BE56-7AD36B8478FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE288BF6-07A8-4843-BE56-7AD36B8478FA}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{FE288BF6-07A8-4843-BE56-7AD36B8478FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE288BF6-07A8-4843-BE56-7AD36B8478FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE288BF6-07A8-4843-BE56-7AD36B8478FA}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{0A5AB426-4A5F-4D8E-A837-331AB3FC66F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A5AB426-4A5F-4D8E-A837-331AB3FC66F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A5AB426-4A5F-4D8E-A837-331AB3FC66F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A5AB426-4A5F-4D8E-A837-331AB3FC66F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9577609C-F8E1-45B4-B42E-628A09FF6475}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9577609C-F8E1-45B4-B42E-628A09FF6475}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9577609C-F8E1-45B4-B42E-628A09FF6475}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9577609C-F8E1-45B4-B42E-628A09FF6475}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70173ADA-5D07-4175-9D46-80519FF3EF87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70173ADA-5D07-4175-9D46-80519FF3EF87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70173ADA-5D07-4175-9D46-80519FF3EF87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70173ADA-5D07-4175-9D46-80519FF3EF87}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

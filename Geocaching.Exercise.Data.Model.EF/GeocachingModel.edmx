@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="GeocachingExerciseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'GeocachingExercise.dbo.vwGeocache' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwGeocache">
+          <Key>
+            <PropertyRef Name="Id" />
+            
+            
+            
+            
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1024" Nullable="false" />
+          <Property Name="Latitude" Type="float" Nullable="false" />
+          <Property Name="Longitude" Type="float" Nullable="false" />
+        </EntityType>
+        <Function Name="spGeocacheAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Description" Type="varchar" Mode="In" />
+          <Parameter Name="Latitude" Type="float" Mode="In" />
+          <Parameter Name="Longitude" Type="float" Mode="In" />
+        </Function>
+        <Function Name="spGeocacheDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GeocacheId" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="GeocachingExerciseModelStoreContainer">
+          <EntitySet Name="vwGeocache" EntityType="Self.vwGeocache" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwGeocache].[Id] AS [Id], 
+    [vwGeocache].[Name] AS [Name], 
+    [vwGeocache].[Description] AS [Description], 
+    [vwGeocache].[Latitude] AS [Latitude], 
+    [vwGeocache].[Longitude] AS [Longitude]
+    FROM [dbo].[vwGeocache] AS [vwGeocache]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GeocachingExerciseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="GeocachingEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Geocaches" EntityType="GeocachingExerciseModel.Geocache" />
+          <FunctionImport Name="spGeocacheDelete">
+          <Parameter Name="GeocacheId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spGeocacheAdd" ReturnType="Collection(Int32)">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="Latitude" Mode="In" Type="Double" />
+            <Parameter Name="Longitude" Mode="In" Type="Double" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="Geocache">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="Latitude" Type="Double" Nullable="false" />
+          <Property Name="Longitude" Type="Double" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GeocachingExerciseModelStoreContainer" CdmEntityContainer="GeocachingEntities">
+          <EntitySetMapping Name="Geocaches">
+            <EntityTypeMapping TypeName="GeocachingExerciseModel.Geocache">
+              <MappingFragment StoreEntitySet="vwGeocache">
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="GeocachingExerciseModel.Geocache">
+              <ModificationFunctionMapping>
+                <DeleteFunction FunctionName="GeocachingExerciseModel.Store.spGeocacheDelete" >
+                  <ScalarProperty Name="Id" ParameterName="GeocacheId" />
+                </DeleteFunction>
+                <InsertFunction FunctionName="GeocachingExerciseModel.Store.spGeocacheAdd">
+                  <ScalarProperty Name="Longitude" ParameterName="Longitude" />
+                  <ScalarProperty Name="Latitude" ParameterName="Latitude" />
+                  <ScalarProperty Name="Description" ParameterName="Description" />
+                  <ScalarProperty Name="Name" ParameterName="Name" />
+                  <ResultBinding Name="Id" ColumnName="Id" />
+                </InsertFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spGeocacheDelete" FunctionName="GeocachingExerciseModel.Store.spGeocacheDelete" />
+          <FunctionImportMapping FunctionImportName="spGeocacheAdd" FunctionName="GeocachingExerciseModel.Store.spGeocacheAdd" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
