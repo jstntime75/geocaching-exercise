@@ -6,14 +6,14 @@ namespace Geocaching.Exercise.Logging
 {
     public static class Logger
     {
-        private static readonly Lazy<ILog> _log = new Lazy<ILog>(
+        private static readonly Lazy<ILog> LazyLog = new Lazy<ILog>(
             () => LogManager.GetLogger(Assembly.GetCallingAssembly().GetName().Name));
 
         private static ILog Log
         {
             get
             {
-                return _log.Value;
+                return LazyLog.Value;
             }
         }
 

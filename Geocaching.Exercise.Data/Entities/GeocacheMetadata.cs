@@ -21,9 +21,4 @@ namespace Geocaching.Exercise.Data.Entities
         [Range(-180.0, 180.0)]
         public double Longitude { get; set; }
     }
-
-    [MetadataType(typeof(GeocacheMetadata))]
-    public partial class Geocache : Entity
-    {
-    }
 }

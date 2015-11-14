@@ -35,7 +35,7 @@ namespace Geocaching.Exercise.Web.Areas.HelpPage.Controllers
         public ActionResult Api(string apiId)
         {
             ViewBag.NoAngular = true;
-            if (!String.IsNullOrEmpty(apiId))
+            if (!string.IsNullOrEmpty(apiId))
             {
                 HelpPageApiModel apiModel = Configuration.GetHelpPageApiModel(apiId);
                 if (apiModel != null)
@@ -50,7 +50,7 @@ namespace Geocaching.Exercise.Web.Areas.HelpPage.Controllers
         public ActionResult ResourceModel(string modelName)
         {
             ViewBag.NoAngular = true;
-            if (!String.IsNullOrEmpty(modelName))
+            if (!string.IsNullOrEmpty(modelName))
             {
                 ModelDescriptionGenerator modelDescriptionGenerator = Configuration.GetModelDescriptionGenerator();
                 ModelDescription modelDescription;

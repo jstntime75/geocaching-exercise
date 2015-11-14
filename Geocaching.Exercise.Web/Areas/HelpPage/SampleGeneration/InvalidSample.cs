@@ -13,6 +13,7 @@ namespace Geocaching.Exercise.Web.Areas.HelpPage
             {
                 throw new ArgumentNullException("errorMessage");
             }
+
             ErrorMessage = errorMessage;
         }
 
