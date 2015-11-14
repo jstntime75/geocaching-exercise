@@ -8,14 +8,7 @@
 
             $scope.delete = function (geocache) {
                 if (window.confirm('Are you sure you want to delete ' + geocache.Name + '?')) {
-                    $http.post(
-                            '/api/geocache/delete',
-                            JSON.stringify(geocache),
-                            {
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                }
-                            })
+                    $http.delete('/api/geocache/' + geocache.Id)
                         .success(function (data, status, headers, config) {
                             toastr.success(geocache.Name + ' was successfully deleted.');
                             if (geocache.Id === $scope.selectedCache.Id) {
@@ -89,7 +82,7 @@
                     }
 
                     $http.post(
-                            "/api/geocache/create",
+                            "/api/geocache",
                              JSON.stringify(newValue),
                             {
                                 headers: {

@@ -72,11 +72,6 @@ namespace Geocaching.Exercise.Data.Model.EF
                 query = query.Where(specification.Filter);
             }
 
-            if (null != specification.OrderBy)
-            {
-                query = specification.OrderBy(query);
-            }
-
             if (null != specification.Skip && specification.Skip > 0)
             {
                 query = query.Skip(specification.Skip.Value);

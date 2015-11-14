@@ -9,7 +9,6 @@ namespace Geocaching.Exercise.Web.Controllers
 {
     public class GeocacheController : ApiController
     {
-        // GET api/geocache
         [HttpGet]
         [Route("api/geocache")]
         [ResponseType(typeof(Geocache[]))]
@@ -29,7 +28,6 @@ namespace Geocaching.Exercise.Web.Controllers
             }
         }
 
-        // GET api/geocache/5
         [HttpGet]
         [Route("api/geocache/{id}")]
         [ResponseType(typeof(Geocache))]
@@ -52,9 +50,8 @@ namespace Geocaching.Exercise.Web.Controllers
             }
         }
 
-        // POST api/geocache/create
         [HttpPost]
-        [Route("api/geocache/create")]
+        [Route("api/geocache")]
         [ResponseType(typeof(Geocache))]
         public async Task<IHttpActionResult> Create(Geocache newValue)
         {
@@ -74,21 +71,27 @@ namespace Geocaching.Exercise.Web.Controllers
             return this.Ok(newValue);
         }
 
-        // POST api/geocache/delete
-        [HttpPost]
-        [Route("api/geocache/delete")]
+        [HttpDelete]
+        [Route("api/geocache/{id}")]
         [ResponseType(typeof(Geocache))]
-        public async Task<IHttpActionResult> Delete(Geocache cache)
+        public async Task<IHttpActionResult> Delete(int id)
         {
             using (var work = new GeocachingWork())
             {
                 var repository = work.GetRepository<Geocache>();
 
-                repository.Delete(cache);
-                await work.CommitAsync();
-            }
+                var spec = new DataRetrievalSpecification<Geocache>();
+                spec.Filter = x => x.Id == id;
 
-            return this.Ok(cache);
+                var cache = await repository.RetrieveFirstAsync(spec);
+                if (null != cache)
+                {
+                    repository.Delete(cache);
+                    await work.CommitAsync();
+                }
+
+                return this.Ok(cache);
+            }
         }
     }
 }

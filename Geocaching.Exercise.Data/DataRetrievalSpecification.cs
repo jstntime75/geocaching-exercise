@@ -8,8 +8,6 @@ namespace Geocaching.Exercise.Data
     {
         public Expression<Func<TEntity, bool>> Filter { get; set; }
 
-        public Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> OrderBy { get; set; }
-
         public int? Skip { get; set; }
 
         public int? Take { get; set; }
