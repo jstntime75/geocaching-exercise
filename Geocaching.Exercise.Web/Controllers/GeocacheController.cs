@@ -1,6 +1,6 @@
-﻿using Geocaching.Exercise;
-using Geocaching.Exercise.Data;
+﻿using Geocaching.Exercise.Data;
 using Geocaching.Exercise.Data.Entities;
+using Geocaching.Exercise.Logging;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -39,6 +39,7 @@ namespace Geocaching.Exercise.Web.Controllers
             {
                 result.HasError = true;
                 result.Message = ex.GetDetailMessage();
+                Logger.LogError(ex.GetExceptionDetail());
             }
 
             return this.Ok(result);
@@ -75,6 +76,7 @@ namespace Geocaching.Exercise.Web.Controllers
             {
                 result.HasError = true;
                 result.Message = ex.GetDetailMessage();
+                Logger.LogError(ex.GetExceptionDetail());
             }
 
             return this.Ok(result);
@@ -108,6 +110,7 @@ namespace Geocaching.Exercise.Web.Controllers
             {
                 result.HasError = true;
                 result.Message = ex.GetDetailMessage();
+                Logger.LogError(ex.GetExceptionDetail());
             }
 
             return this.Ok(result);
@@ -147,6 +150,7 @@ namespace Geocaching.Exercise.Web.Controllers
             {
                 result.HasError = true;
                 result.Message = ex.GetDetailMessage();
+                Logger.LogError(ex.GetExceptionDetail());
             }
 
             return this.Ok(result);
