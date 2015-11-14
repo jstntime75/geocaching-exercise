@@ -30,7 +30,7 @@ namespace Geocaching.Exercise.Data.Model.EF
             Dispose(false);
         }
 
-        public IRepository<TEntity> GetRepository<TEntity>() where TEntity : class
+        public IRepository<TEntity> GetRepository<TEntity>() where TEntity : Entity
         {
             if (_repositories.Keys.Contains(typeof(TEntity)))
             {

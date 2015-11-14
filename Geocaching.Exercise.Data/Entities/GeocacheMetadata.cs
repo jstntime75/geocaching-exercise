@@ -23,7 +23,7 @@ namespace Geocaching.Exercise.Data.Entities
     }
 
     [MetadataType(typeof(GeocacheMetadata))]
-    public partial class Geocache
+    public partial class Geocache : Entity
     {
     }
 }

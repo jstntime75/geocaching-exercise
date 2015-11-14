@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geocaching.Exercise.Data.Mo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geocaching.Exercise.Data.Test", "Geocaching.Exercise.Data.Test\Geocaching.Exercise.Data.Test.csproj", "{70173ADA-5D07-4175-9D46-80519FF3EF87}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geocaching.Exercise", "Geocaching.Exercise\Geocaching.Exercise.csproj", "{8728794A-7E22-4089-BFA5-98BDB0CAC674}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{70173ADA-5D07-4175-9D46-80519FF3EF87}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70173ADA-5D07-4175-9D46-80519FF3EF87}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70173ADA-5D07-4175-9D46-80519FF3EF87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8728794A-7E22-4089-BFA5-98BDB0CAC674}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8728794A-7E22-4089-BFA5-98BDB0CAC674}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8728794A-7E22-4089-BFA5-98BDB0CAC674}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8728794A-7E22-4089-BFA5-98BDB0CAC674}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

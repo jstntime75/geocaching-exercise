@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Geocaching.Exercise.Data.Model.EF
 {
-    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
+    public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
     {
         private string _entitySetName;
 

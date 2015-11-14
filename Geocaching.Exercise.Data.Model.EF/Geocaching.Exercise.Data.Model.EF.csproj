@@ -87,6 +87,10 @@
       <Project>{0a5ab426-4a5f-4d8e-a837-331ab3fc66f8}</Project>
       <Name>Geocaching.Exercise.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Geocaching.Exercise\Geocaching.Exercise.csproj">
+      <Project>{8728794a-7e22-4089-bfa5-98bdb0cac674}</Project>
+      <Name>Geocaching.Exercise</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

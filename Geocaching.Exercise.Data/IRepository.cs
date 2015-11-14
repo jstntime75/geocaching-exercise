@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 namespace Geocaching.Exercise.Data
 {
     public interface IRepository<TEntity>
+        where TEntity : Entity
     {
         string EntitySetName { get; }
 

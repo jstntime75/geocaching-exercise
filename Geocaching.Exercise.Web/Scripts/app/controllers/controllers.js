@@ -10,13 +10,23 @@
                 if (window.confirm('Are you sure you want to delete ' + geocache.Name + '?')) {
                     $http.delete('/api/geocache/' + geocache.Id)
                         .success(function (data, status, headers, config) {
-                            toastr.success(geocache.Name + ' was successfully deleted.');
-                            if (geocache.Id === $scope.selectedCache.Id) {
-                                $scope.map = null;
-                                $scope.selectedCache = null;
+                            if (data.HasError) {
+                                toastr.error(data.Message);
                             }
+                            else {
+                                if (data.Results == null) {
+                                    toastr.info(data.Message);
+                                }
+                                else {
+                                    toastr.success(geocache.Name + ' was successfully deleted.');
+                                    if (geocache.Id === $scope.selectedCache.Id) {
+                                        $scope.map = null;
+                                        $scope.selectedCache = null;
+                                    }
 
-                            $scope.caches.splice(_.findIndex($scope.caches, { 'Id': geocache.Id }), 1);
+                                    $scope.caches.splice(_.findIndex($scope.caches, { 'Id': geocache.Id }), 1);
+                                }
+                            }
                         }).error(function (data, status, headers, config) {
                             console.log(data);
                             toastr.error('Could not delete geocache id: ' + geocache.Id);
@@ -29,8 +39,18 @@
 
                 $http.get("/api/geocache")
                     .success(function (data, status, headers, config) {
-                        $scope.caches = data;
-                        $scope.hasSearched = true;
+                        if (data.HasError) {
+                            toastr.error(data.Message);
+                        }
+                        else {
+                            if (data.Results == null) {
+                                toastr.info(data.Message);
+                            }
+                            else {
+                                $scope.caches = data.Results;
+                                $scope.hasSearched = true;
+                            }
+                        }
                     }).error(function (data, status, headers, config) {
                         console.log(data);
                         toastr.error('Could not retrieve geocaches');
@@ -90,13 +110,23 @@
                                 }
                             })
                       .success(function (data, status, headers, config) {
-                          if ($scope.hasSearched) {
-                              $scope.caches.push(data);
-                              $scope.caches.sort(function (a, b) {
-                                  return a.Name.toLowerCase().localeCompare(b.Name.toLowerCase());
-                              });
+                          if (data.HasError) {
+                              toastr.error(data.Message);
                           }
-                          toastr.success('Geocache added successfully.');
+                          else {
+                              if (data.Results == null) {
+                                  toastr.info(data.Message);
+                              }
+                              else {
+                                  if ($scope.hasSearched) {
+                                      $scope.caches.push(data.Results);
+                                      $scope.caches.sort(function (a, b) {
+                                          return a.Name.toLowerCase().localeCompare(b.Name.toLowerCase());
+                                      });
+                                  }
+                                  toastr.success('Geocache added successfully.');
+                              }
+                          }
                       }).error(function (data, status, headers, config) {
                           console.log(data);
                           toastr.error('Could not add geocache');

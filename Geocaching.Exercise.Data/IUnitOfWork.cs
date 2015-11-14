@@ -7,6 +7,6 @@ namespace Geocaching.Exercise.Data
     {
         Task<int> CommitAsync();
 
-        IRepository<TEntity> GetRepository<TEntity>() where TEntity : class;
+        IRepository<TEntity> GetRepository<TEntity>() where TEntity : Entity;
     }
 }

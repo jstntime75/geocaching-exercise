@@ -1,5 +1,7 @@
-﻿using Geocaching.Exercise.Data;
+﻿using Geocaching.Exercise;
+using Geocaching.Exercise.Data;
 using Geocaching.Exercise.Data.Entities;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -11,21 +13,35 @@ namespace Geocaching.Exercise.Web.Controllers
     {
         [HttpGet]
         [Route("api/geocache")]
-        [ResponseType(typeof(Geocache[]))]
+        [ResponseType(typeof(ApiResult<Geocache[]>))]
         public async Task<IHttpActionResult> Get()
         {
-            using (var work = new GeocachingWork())
+            var result = new ApiResult<Geocache[]>();
+
+            try
             {
-                var repository = work.GetRepository<Geocache>();
-
-                var entities = await repository.RetrieveAsync();
-                if (null == entities)
+                using (var work = new GeocachingWork())
                 {
-                    return this.NotFound();
-                }
+                    var repository = work.GetRepository<Geocache>();
 
-                return this.Ok(entities.OrderBy(e => e.Name).ToArray());
+                    var entities = await repository.RetrieveAsync();
+                    if (null == entities)
+                    {
+                        result.Message = "No Geocaches found.";
+                    }
+                    else
+                    {
+                        result.Results = entities.OrderBy(e => e.Name).ToArray();
+                    }
+                }
             }
+            catch (Exception ex)
+            {
+                result.HasError = true;
+                result.Message = ex.GetDetailMessage();
+            }
+
+            return this.Ok(result);
         }
 
         [HttpGet]
@@ -33,21 +49,35 @@ namespace Geocaching.Exercise.Web.Controllers
         [ResponseType(typeof(Geocache))]
         public async Task<IHttpActionResult> Get(int id)
         {
-            using (var work = new GeocachingWork())
+            var result = new ApiResult<Geocache>();
+
+            try
             {
-                var repository = work.GetRepository<Geocache>();
-
-                var spec = new DataRetrievalSpecification<Geocache>();
-                spec.Filter = x => x.Id == id;
-
-                var entity = await repository.RetrieveFirstAsync(spec);
-                if (null == entity)
+                using (var work = new GeocachingWork())
                 {
-                    return this.NotFound();
-                }
+                    var repository = work.GetRepository<Geocache>();
 
-                return this.Ok(entity);
+                    var spec = new DataRetrievalSpecification<Geocache>();
+                    spec.Filter = x => x.Id == id;
+
+                    var entity = await repository.RetrieveFirstAsync(spec);
+                    if (null == entity)
+                    {
+                        result.Message = string.Format("No Geocache found. Id: {0}", id);
+                    }
+                    else
+                    {
+                        result.Results = entity;
+                    }
+                }
             }
+            catch (Exception ex)
+            {
+                result.HasError = true;
+                result.Message = ex.GetDetailMessage();
+            }
+
+            return this.Ok(result);
         }
 
         [HttpPost]
@@ -55,20 +85,32 @@ namespace Geocaching.Exercise.Web.Controllers
         [ResponseType(typeof(Geocache))]
         public async Task<IHttpActionResult> Create(Geocache newValue)
         {
-            if (!ModelState.IsValid)
+            var result = new ApiResult<Geocache>();
+
+            try
             {
-                return this.BadRequest(this.ModelState);
+                if (!ModelState.IsValid)
+                {
+                    return this.BadRequest(this.ModelState);
+                }
+
+                using (var work = new GeocachingWork())
+                {
+                    var repository = work.GetRepository<Geocache>();
+
+                    repository.Create(newValue);
+                    await work.CommitAsync();
+                }
+
+                result.Results = newValue;
+            }
+            catch (Exception ex)
+            {
+                result.HasError = true;
+                result.Message = ex.GetDetailMessage();
             }
 
-            using (var work = new GeocachingWork())
-            {
-                var repository = work.GetRepository<Geocache>();
-
-                repository.Create(newValue);
-                await work.CommitAsync();
-            }
-
-            return this.Ok(newValue);
+            return this.Ok(result);
         }
 
         [HttpDelete]
@@ -76,22 +118,38 @@ namespace Geocaching.Exercise.Web.Controllers
         [ResponseType(typeof(Geocache))]
         public async Task<IHttpActionResult> Delete(int id)
         {
-            using (var work = new GeocachingWork())
+            var result = new ApiResult<Geocache>();
+
+            try
             {
-                var repository = work.GetRepository<Geocache>();
-
-                var spec = new DataRetrievalSpecification<Geocache>();
-                spec.Filter = x => x.Id == id;
-
-                var cache = await repository.RetrieveFirstAsync(spec);
-                if (null != cache)
+                using (var work = new GeocachingWork())
                 {
-                    repository.Delete(cache);
-                    await work.CommitAsync();
-                }
+                    var repository = work.GetRepository<Geocache>();
 
-                return this.Ok(cache);
+                    var spec = new DataRetrievalSpecification<Geocache>();
+                    spec.Filter = x => x.Id == id;
+
+                    var cache = await repository.RetrieveFirstAsync(spec);
+                    if (null == cache)
+                    {
+                        result.Message = string.Format("No Geocache found. Id: {0}", id);
+                    }
+                    else
+                    {
+                        repository.Delete(cache);
+                        await work.CommitAsync();
+
+                        result.Results = cache;
+                    }
+                }
             }
+            catch (Exception ex)
+            {
+                result.HasError = true;
+                result.Message = ex.GetDetailMessage();
+            }
+
+            return this.Ok(result);
         }
     }
 }
