@@ -2,8 +2,8 @@
     .controller('CachesCtrl', [
         '$scope', '$http', '$uibModal', 'toastr', function ($scope, $http, $uibModal, toastr) {
             $scope.caches = [];
-            $scope.selectedCache = {};
-            $scope.map = {};
+            $scope.selectedCache = null;
+            $scope.map = null;
             $scope.hasSearched = false;
 
             $scope.delete = function (geocache) {

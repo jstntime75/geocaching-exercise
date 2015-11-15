@@ -9,8 +9,15 @@ using System.Web.Http.Description;
 
 namespace Geocaching.Exercise.Web.Controllers
 {
+    /// <summary>
+    /// represents a Geocache entity and it's operations
+    /// </summary>
     public class GeocacheController : ApiController
     {
+        /// <summary>
+        /// retrieve a list of unfiltered Geocache objects
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("api/geocache")]
         [ResponseType(typeof(ApiResult<Geocache[]>))]
@@ -45,6 +52,11 @@ namespace Geocaching.Exercise.Web.Controllers
             return this.Ok(result);
         }
 
+        /// <summary>
+        /// retrieve a Geocache object by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("api/geocache/{id}")]
         [ResponseType(typeof(Geocache))]
@@ -82,6 +94,11 @@ namespace Geocaching.Exercise.Web.Controllers
             return this.Ok(result);
         }
 
+        /// <summary>
+        /// create a new Geocache object
+        /// </summary>
+        /// <param name="newValue"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("api/geocache")]
         [ResponseType(typeof(Geocache))]
@@ -116,6 +133,11 @@ namespace Geocaching.Exercise.Web.Controllers
             return this.Ok(result);
         }
 
+        /// <summary>
+        /// delete a Geoecache object by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("api/geocache/{id}")]
         [ResponseType(typeof(Geocache))]
