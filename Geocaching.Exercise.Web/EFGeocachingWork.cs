@@ -2,9 +2,9 @@
 
 namespace Geocaching.Exercise.Web
 {
-    public class GeocachingWork : UnitOfWork
+    public class EFGeocachingWork : UnitOfWork
     {
-        public GeocachingWork()
+        public EFGeocachingWork()
             : base(() => new GeocachingEntities())
         {
         }

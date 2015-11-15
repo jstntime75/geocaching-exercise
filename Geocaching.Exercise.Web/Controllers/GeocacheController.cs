@@ -12,7 +12,7 @@ namespace Geocaching.Exercise.Web.Controllers
     /// <summary>
     /// represents a Geocache entity and it's operations
     /// </summary>
-    public class GeocacheController : ApiController
+    public class GeocacheController : BaseController
     {
         /// <summary>
         /// retrieve a list of unfiltered Geocache objects
@@ -27,7 +27,7 @@ namespace Geocaching.Exercise.Web.Controllers
 
             try
             {
-                using (var work = new GeocachingWork())
+                using (var work = GetWork())
                 {
                     var repository = work.GetRepository<Geocache>();
 
@@ -66,7 +66,7 @@ namespace Geocaching.Exercise.Web.Controllers
 
             try
             {
-                using (var work = new GeocachingWork())
+                using (var work = GetWork())
                 {
                     var repository = work.GetRepository<Geocache>();
 
@@ -113,7 +113,7 @@ namespace Geocaching.Exercise.Web.Controllers
                     return this.BadRequest(this.ModelState);
                 }
 
-                using (var work = new GeocachingWork())
+                using (var work = GetWork())
                 {
                     var repository = work.GetRepository<Geocache>();
 
@@ -147,7 +147,7 @@ namespace Geocaching.Exercise.Web.Controllers
 
             try
             {
-                using (var work = new GeocachingWork())
+                using (var work = GetWork())
                 {
                     var repository = work.GetRepository<Geocache>();
 
